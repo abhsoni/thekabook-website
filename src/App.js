@@ -5,125 +5,217 @@ import Testimonials from "./components/testimonials";
 import Faq from "./components/faq";
 import Footer from "./components/footer";
 import Team from "./components/team";
+import Contact from "./components/contact";
+import Blogs from "./components/blogs/blogs";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Route, Routes, Switch } from "react-router-dom";
+import Page from "./components/blogs/page";
+import { createBrowserHistory } from "history";
+import NotFound from "./components/notFound";
+import Login from "./components/webEstimate/login";
+
+export const history = createBrowserHistory();
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHome, setIsHome] = useState(true);
+  const [isAbout, setIsAbout] = useState(false);
+  const [isFeatures, setIsFeatures] = useState(false);
+  const [isTeam, setIsTeam] = useState(false);
+  const [isContact, setIsContact] = useState(false);
+  const highlightNavBar = () => {
+    if (window.scrollY <= 1062) {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+    if (window.scrollY > 1062 && window.scrollY < 1850) {
+      setIsAbout(true);
+    } else {
+      setIsAbout(false);
+    }
+    if (window.scrollY >= 1850 && window.scrollY < 4632) {
+      setIsFeatures(true);
+    } else {
+      setIsFeatures(false);
+    }
+    if (window.scrollY >= 4632 && window.scrollY < 5400) {
+      setIsTeam(true);
+    } else {
+      setIsTeam(false);
+    }
+    if (window.scrollY >= 5400) {
+      setIsContact(true);
+    } else {
+      setIsContact(false);
+    }
+  };
+  const navBarSet = () => {
+    if (isMobile) {
+      setIsMobile(!isMobile);
+    } else {
+      // setTransparentHeader(true);
+    }
+  };
+  //   window.addEventListener("scroll", (event) => {
+  //     console.log(window.scrollY);
+  //     console.log(window.scrollX);
+  //   });
+  window.addEventListener("scroll", highlightNavBar);
   return (
     <section>
-      <Home />
-      <About />
-      <Services />
-      <Testimonials />
-      <Faq />
-      <Team />
-      <section id="contact" class="contact">
-        <div class="container">
-          <div class="section-title">
-            <span>Contact</span>
-            <h2>Contact</h2>
-            {/* <p>
-              Sit sint consectetur velit quisquam cupiditate impedit suscipit
-              alias
-            </p> */}
-          </div>
+      <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+          {/* <h1 class="logo">
+            <a href="index.html">eNno</a>
+          </h1> */}
 
-          <div class="row">
-            <div class="col-lg-5 d-flex align-items-stretch">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>
-                    185, Vishwakarma Nagar, Annapurna Rd, Indore, Madhya Pradesh
-                    452009
-                  </p>
-                </div>
+          <Link to="/" class="logo">
+            <img src="assets/img/logo.png" alt="" class="img-fluid" />
+          </Link>
 
-                <div class="email">
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>hello@thekabook.com</p>
-                </div>
-
-                <div class="phone">
-                  <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>+91 89898 63366</p>
-                </div>
-
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8567.241173513416!2d75.8309330559442!3d22.692665926365585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd476b23e641%3A0x1263136774a83f0b!2sSiddharth%20Inani%20and%20Associates!5e0!3m2!1sen!2sin!4v1648129244285!5m2!1sen!2sin"
-                  frameborder="0"
-                  style={{ border: "0", width: "100%", height: "290px" }}
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </div>
-
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-              <form
-                action="forms/contact.php"
-                method="post"
-                role="form"
-                class="php-email-form"
+          <nav
+            id="navbar"
+            className={`navbar ${isMobile ? "navbar-mobile" : ""}`}
+            // {isMobile ? "navbar" : "navbar-mobile"}
+            onClick={navBarSet}
+          >
+            <ul>
+              <li>
+                <a
+                  class={`nav-link scrollto ${isHome ? "active" : ""}`}
+                  href="/#hero"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  class={`nav-link scrollto ${isAbout ? "active" : ""}`}
+                  href="/#about"
+                >
+                  About
+                </a>
+                {/* <NavLink
+                  to="#about"
+                  activeClassname="active"
+                  class="nav-link scrollto"
+                >
+                  About
+                </NavLink> */}
+              </li>
+              <li>
+                <a
+                  class={`nav-link scrollto ${isFeatures ? "active" : ""}`}
+                  href="/#services"
+                >
+                  Features
+                </a>
+                {/* <NavLink
+                  to="#features"
+                  activeClassname="active"
+                  class="nav-link scrollto"
+                >
+                  Features
+                </NavLink> */}
+              </li>
+              {/* <li>
+                <a class="nav-link scrollto " href="#portfolio">
+                  Portfolio
+                </a>
+              </li> */}
+              <li>
+                <a
+                  class={`nav-link scrollto ${isTeam ? "active" : ""}`}
+                  href="/#team"
+                >
+                  Team
+                </a>
+              </li>
+              {/* <li> */}
+              {/* <Link
+                  // class={`nav-link scrollto ${isContact ? "active" : ""}`}
+                  to="/blogs"
+                >
+                  Blogs
+                </Link> */}
+              {/* <NavLink
+                  to="/blogs"
+                  activeClassname="active"
+                  class="nav-link scrollto"
+                >
+                  Blogs
+                </NavLink> */}
+              {/* </li> */}
+              <li>
+                <a
+                  class={`nav-link scrollto ${isContact ? "active" : ""}`}
+                  href="/#contact"
+                >
+                  Contact
+                </a>
+              </li>
+              {/* <Link
+                // class={`nav-link scrollto ${isContact ? "active" : ""}`}
+                to="/login"
               >
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="name">Your Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      id="name"
-                      required
-                    />
-                  </div>
-                  <div class="form-group col-md-6 mt-3 mt-md-0">
-                    <label for="name">Your Email</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      id="email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group mt-3">
-                  <label for="name">Subject</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="subject"
-                    id="subject"
-                    required
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <label for="name">Message</label>
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="10"
-                    required
-                  ></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit">Send Message</button>
-                </div>
-              </form>
-            </div>
-          </div>
+                Login
+              </Link> */}
+              <li>
+                <a
+                  class="getstarted scrollto"
+                  href="https://play.google.com/store/apps/details?id=com.thekabook"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Download App
+                </a>
+              </li>
+            </ul>
+            <i
+              className={
+                isMobile
+                  ? "bi mobile-nav-toggle bi-x "
+                  : "bi mobile-nav-toggle bi-list "
+              }
+              onClick={() => setIsMobile(!isMobile)}
+            ></i>
+          </nav>
         </div>
-      </section>
+      </header>
+      {/* <Switch> */}
+      <Routes>
+        <Route
+          path="/"
+          element={[
+            <Home />,
+            <About />,
+            <Services />,
+            <Testimonials />,
+            <Faq />,
+            <Team />,
+            <Contact />,
+            <Footer />,
+          ]}
+        />
+        <Route path="blogs" element={<Blogs />}></Route>
+        <Route path="blogs/page" element={<Page />} exact />
+        {/* <Route path="login" element={<Login />} /> */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      {/* </Switch> */}
+      {/* </Router> */}
+      {/* <Home /> */}
+      {/* <About />
+        <Services />
+        <Testimonials />
+        <Faq />
+        <Team />
+        <Contact />
 
-      <Footer />
+        <Footer /> */}
+      {/* </Route> */}
     </section>
   );
 }

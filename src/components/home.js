@@ -1,181 +1,83 @@
 import Animate from "./animate";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
+import axios from "axios";
 
 function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isHome, setIsHome] = useState(true);
-  const [isAbout, setIsAbout] = useState(false);
-  const [isFeatures, setIsFeatures] = useState(false);
-  const [isTeam, setIsTeam] = useState(false);
-  const [isContact, setIsContact] = useState(false);
-  const highlightNavBar = () => {
-    if (window.scrollY <= 1062) {
-      setIsHome(true);
-    } else {
-      setIsHome(false);
+  const [phoneNo, setPhoneNo] = useState("");
+  // const [txt, setTxt] = useState("");
+  function sendText() {
+    if (phoneNo.length != 12) {
+      alert(
+        "👉Invalid number of digits.\n" +
+          "🙂 Please enter valid Mobile Number📴."
+      );
+      return;
     }
-    if (window.scrollY > 1062 && window.scrollY < 1850) {
-      setIsAbout(true);
-    } else {
-      setIsAbout(false);
-    }
-    if (window.scrollY >= 1850 && window.scrollY < 4632) {
-      setIsFeatures(true);
-    } else {
-      setIsFeatures(false);
-    }
-    if (window.scrollY >= 4632 && window.scrollY < 5400) {
-      setIsTeam(true);
-    } else {
-      setIsTeam(false);
-    }
-    if (window.scrollY >= 5400) {
-      setIsContact(true);
-    } else {
-      setIsContact(false);
-    }
-  };
-  const navBarSet = () => {
-    if (isMobile) {
-      setIsMobile(!isMobile);
-    } else {
-      // setTransparentHeader(true);
-    }
-  };
-  //   window.addEventListener("scroll", (event) => {
-  //     console.log(window.scrollY);
-  //     console.log(window.scrollX);
-  //   });
-  window.addEventListener("scroll", highlightNavBar);
+    const phone_number_format =
+      "+" +
+      phoneNo.substring(0, 2) +
+      " " +
+      phoneNo.substring(2, 7) +
+      "-" +
+      phoneNo.substring(7, 12);
+    console.log("jkdhkh", phoneNo, " ", phone_number_format);
+    axios
+      .post(
+        "https://cors-everywhere.herokuapp.com/http://15.206.127.253/api/v1/app-invite/",
+        {
+          phone_number: phone_number_format,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(
+        (response) => console.log("Sucessful", response),
+        alert("Thank You.\n" + "A message will be sent to you.")
+      )
+      .catch((err) => console.log("Something went wrong.", err));
+
+    // console.log(phoneNo);
+  }
+
+  // async function sendText() {
+  //   if (phoneNo.length != 12) {
+  //     alert(
+  //       "👉Invalid number of digits.\n" +
+  //         "🙂 Please enter valid Mobile Number📴."
+  //     );
+  //     return;
+  //   }
+  //   const response = await fetch(
+  //     "https://supervisor-form-default-rtdb.firebaseio.com/phone_number.json",
+  //     {
+  //       method: "POST",
+  //       body: JSON.stringify(phoneNo),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   if (!response.ok) {
+  //     throw new Error("Something went wrong!xxxxxxxx");
+  //   }
+  //   const data = await response.json();
+  //   // const { text } = phoneNo;
+  //   if (response.ok) {
+  //     alert("Thank you!😎");
+  //     console.log("okokok");
+  //   }
+
+  //   // console.log(data);
+  // }
+
   return (
     <section>
-      <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
-          {/* <h1 class="logo">
-            <a href="index.html">eNno</a>
-          </h1> */}
-
-          <a href="#" class="logo">
-            <img src="assets/img/logo.png" alt="" class="img-fluid" />
-          </a>
-
-          <nav
-            id="navbar"
-            className={`navbar ${isMobile ? "navbar-mobile" : ""}`}
-            // {isMobile ? "navbar" : "navbar-mobile"}
-            onClick={navBarSet}
-          >
-            <ul>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isHome ? "active" : ""}`}
-                  href="#hero"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isAbout ? "active" : ""}`}
-                  href="#about"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isFeatures ? "active" : ""}`}
-                  href="#services"
-                >
-                  Features
-                </a>
-              </li>
-              {/* <li>
-                <a class="nav-link scrollto " href="#portfolio">
-                  Portfolio
-                </a>
-              </li> */}
-              <li>
-                <a
-                  class={`nav-link scrollto ${isTeam ? "active" : ""}`}
-                  href="#team"
-                >
-                  Team
-                </a>
-              </li>
-              {/* <li class="dropdown">
-                <a href="#">
-                  <span>Drop Down</span> <i class="bi bi-chevron-down"></i>
-                </a>
-                <ul>
-                  <li>
-                    <a href="#">Drop Down 1</a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#">
-                      <span>Deep Drop Down</span>{" "}
-                      <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul>
-                      <li>
-                        <a href="#">Deep Drop Down 1</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Drop Down 2</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Drop Down 3</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Drop Down 4</a>
-                      </li>
-                      <li>
-                        <a href="#">Deep Drop Down 5</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Drop Down 2</a>
-                  </li>
-                  <li>
-                    <a href="#">Drop Down 3</a>
-                  </li>
-                  <li>
-                    <a href="#">Drop Down 4</a>
-                  </li>
-                </ul>
-              </li> */}
-              <li>
-                <a
-                  class={`nav-link scrollto ${isContact ? "active" : ""}`}
-                  href="#contact"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  class="getstarted scrollto"
-                  href="https://play.google.com/store/apps/details?id=com.thekabook"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Download App
-                </a>
-              </li>
-            </ul>
-            <i
-              className={
-                isMobile
-                  ? "bi mobile-nav-toggle bi-x "
-                  : "bi mobile-nav-toggle bi-list "
-              }
-              onClick={() => setIsMobile(!isMobile)}
-            ></i>
-          </nav>
-        </div>
-      </header>
-
       <section id="hero" class="d-flex align-items-center">
         <div class="container">
           <div class="row">
@@ -317,6 +219,37 @@ function Home() {
                 We automate your material management and procurement needs on
                 site
               </h2>
+              <div className="container d-flex mt-2 mb-5 p-0">
+                <div className="row justify-content-end">
+                  <div className="col">
+                    <PhoneInput
+                      country={"in"}
+                      value={phoneNo}
+                      // onChange={(phone) => this.setState({ phone })}
+                      onChange={(e) => setPhoneNo(e)}
+                      name="phone_number"
+                    />
+                  </div>
+                  <div className="col mobileInput ">
+                    <button
+                      // href=""
+                      class="btn-get-started scrollto"
+                      style={{
+                        maxHeight: "42px",
+                        border: "0",
+                      }}
+                      onClick={sendText}
+                    >
+                      Send&nbsp;Link
+                    </button>
+
+                    {/* <form> */}
+                    {/* <input type="text" id="name" placeholder="+91" /> */}
+                    {/* </form> */}
+                  </div>
+                  {/* {console.log(`Number is ${phoneNo}`)} */}
+                </div>
+              </div>
               <div class="d-flex">
                 <a
                   href="https://play.google.com/store/apps/details?id=com.thekabook"
