@@ -2021,9 +2021,10 @@ section {
   }
 }
 
-.login {
-  display: flex;
-  height: 100%;
+#login {
+  position: fixed;
+  /* display: contents; */
+  /* height: 100%; */
   background: linear-gradient(
     to right,
     #e5e5e5 0%,
@@ -2035,6 +2036,8 @@ section {
 .left {
   text-align: center;
   justify-content: center;
+  height: 100%;
+  width: 50%;
 }
 .left .img {
   max-width: 440px;
@@ -2045,6 +2048,7 @@ section {
 .right {
   text-align: center;
   justify-content: center;
+  width: 50%;
 }
 .right .mbn {
   text-align: start;
@@ -2055,4 +2059,17 @@ section {
   /* border-radius: 50%;
   border: 10px solid rgba(255, 255, 255);
   margin: 0 auto; */
+}
+.button .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 8px 30px 10px 30px;
+  border-radius: 4px;
+  transition: 0.5s;
+  color: #fff;
+  background: #5d5fef;
+  box-shadow: 0 8px 28px rgba(32, 107, 251, 0.45);
 }

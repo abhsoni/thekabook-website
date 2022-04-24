@@ -5,8 +5,11 @@ import React, { useState } from "react";
 function Login() {
   const [phoneNo, setPhoneNo] = useState("");
   return (
-    <section className="login">
-      <div className="container">
+    <section
+      className="container d-flex align-items-center justify-content-center"
+      style={{ background: "#000000" }}
+    >
+      <div className="login ">
         <div className="row ">
           <div className="col left">
             <img
@@ -14,21 +17,64 @@ function Login() {
               alt="Image"
               className="img-fluid img"
             />
-            <div>Directly Procure from manufacturers at Best Prices</div>
+            <div
+              style={{
+                fontFamily: "Roboto",
+                fontWeight: "400",
+                fontSize: "24px",
+                marginTop: "52px",
+                fontColor: "#000000",
+              }}
+            >
+              <span style={{ fontWeight: "700" }}>Directly Procure </span>
+              <br />
+              from manufacturers at Best Prices
+            </div>
           </div>
           <div className="col right">
             <img
               src="assets/img/login/login-thekabook.png"
               alt="Image"
               className="img-fluid img"
+              style={{ marginTop: "100px" }}
             />
-            <div>Construction Management Made Easy</div>
-            <div>Please Login to continue</div>
+            <div
+              style={{
+                fontFamily: "Raleway",
+                fontWeight: "500",
+                fontSize: "18px",
+                marginTop: "24px",
+                color: "#808080",
+              }}
+            >
+              Construction Management Made Easy
+            </div>
+            <div
+              style={{
+                fontFamily: "Raleway",
+                fontWeight: "700",
+                fontSize: "18px",
+                marginTop: "64px",
+                marginBottom: "52px",
+                fontColor: "#000000",
+              }}
+            >
+              Please Login to continue
+            </div>
             <div>
               <div className="row">
                 <div className="col"></div>
                 <div className="col mbn">
-                  <span style={{ textAlign: "start" }}>
+                  <span
+                    style={{
+                      textAlign: "start",
+                      fontFamily: "Raleway",
+                      fontWeight: "400",
+                      fontSize: "16px",
+                      marginTop: "52px",
+                      fontColor: "#808080",
+                    }}
+                  >
                     Enter your Mobile Number:
                   </span>
                   <PhoneInput
@@ -43,7 +89,7 @@ function Login() {
                 <div className="col"></div>
               </div>
             </div>
-            <div>
+            <div className="button">
               <div className="mobileInput ">
                 <button
                   // href=""
@@ -51,10 +97,11 @@ function Login() {
                   style={{
                     maxHeight: "42px",
                     border: "0",
+                    marginTop: "36px",
                   }}
                   onClick={null}
                 >
-                  Send&nbsp;Link
+                  Send&nbsp;OTP
                 </button>
               </div>
             </div>

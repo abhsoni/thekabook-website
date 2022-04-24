@@ -201,7 +201,7 @@ function App() {
         />
         <Route path="blogs" element={<Blogs />}></Route>
         <Route path="blogs/page" element={<Page />} exact />
-        {/* <Route path="login" element={<Login />} /> */}
+        <Route path="login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* </Switch> */}

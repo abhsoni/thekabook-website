@@ -26,7 +26,7 @@ function Home() {
     console.log("jkdhkh", phoneNo, " ", phone_number_format);
     axios
       .post(
-        "https://cors-everywhere.herokuapp.com/http://15.206.127.253/api/v1/app-invite/",
+        "http://15.206.127.253/api/v1/app-invite/",
         {
           phone_number: phone_number_format,
         },
@@ -37,7 +37,7 @@ function Home() {
         }
       )
       .then(
-        (response) => console.log("Sucessful", response),
+        (response) => console.log("Successful", response),
         alert("Thank You.\n" + "A message will be sent to you.")
       )
       .catch((err) => console.log("Something went wrong.", err));
