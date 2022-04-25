@@ -14,8 +14,7 @@ import Page from "./components/blogs/page";
 import { createBrowserHistory } from "history";
 import NotFound from "./components/notFound";
 import Login from "./components/webEstimate/login";
-
-export const history = createBrowserHistory();
+import SupervisorForm from "./components/supervisorForm/supervisor-form";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -63,127 +62,131 @@ function App() {
   //     console.log(window.scrollX);
   //   });
   window.addEventListener("scroll", highlightNavBar);
+  const pathname = window.location.pathname;
+  console.log(pathname);
   return (
     <section>
-      <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
-          {/* <h1 class="logo">
+      {pathname === "/supervisor-form" ? null : (
+        <header id="header" class="fixed-top">
+          <div class="container d-flex align-items-center justify-content-between">
+            {/* <h1 class="logo">
             <a href="index.html">eNno</a>
           </h1> */}
 
-          <Link to="/" class="logo">
-            <img src="assets/img/logo.png" alt="" class="img-fluid" />
-          </Link>
+            <Link to="/" class="logo">
+              <img src="assets/img/logo.png" alt="" class="img-fluid" />
+            </Link>
 
-          <nav
-            id="navbar"
-            className={`navbar ${isMobile ? "navbar-mobile" : ""}`}
-            // {isMobile ? "navbar" : "navbar-mobile"}
-            onClick={navBarSet}
-          >
-            <ul>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isHome ? "active" : ""}`}
-                  href="/#hero"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isAbout ? "active" : ""}`}
-                  href="/#about"
-                >
-                  About
-                </a>
-                {/* <NavLink
+            <nav
+              id="navbar"
+              className={`navbar ${isMobile ? "navbar-mobile" : ""}`}
+              // {isMobile ? "navbar" : "navbar-mobile"}
+              onClick={navBarSet}
+            >
+              <ul>
+                <li>
+                  <a
+                    class={`nav-link scrollto ${isHome ? "active" : ""}`}
+                    href="/#hero"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class={`nav-link scrollto ${isAbout ? "active" : ""}`}
+                    href="/#about"
+                  >
+                    About
+                  </a>
+                  {/* <NavLink
                   to="#about"
                   activeClassname="active"
                   class="nav-link scrollto"
                 >
                   About
                 </NavLink> */}
-              </li>
-              <li>
-                <a
-                  class={`nav-link scrollto ${isFeatures ? "active" : ""}`}
-                  href="/#services"
-                >
-                  Features
-                </a>
-                {/* <NavLink
+                </li>
+                <li>
+                  <a
+                    class={`nav-link scrollto ${isFeatures ? "active" : ""}`}
+                    href="/#services"
+                  >
+                    Features
+                  </a>
+                  {/* <NavLink
                   to="#features"
                   activeClassname="active"
                   class="nav-link scrollto"
                 >
                   Features
                 </NavLink> */}
-              </li>
-              {/* <li>
+                </li>
+                {/* <li>
                 <a class="nav-link scrollto " href="#portfolio">
                   Portfolio
                 </a>
               </li> */}
-              <li>
-                <a
-                  class={`nav-link scrollto ${isTeam ? "active" : ""}`}
-                  href="/#team"
-                >
-                  Team
-                </a>
-              </li>
-              {/* <li> */}
-              {/* <Link
+                <li>
+                  <a
+                    class={`nav-link scrollto ${isTeam ? "active" : ""}`}
+                    href="/#team"
+                  >
+                    Team
+                  </a>
+                </li>
+                {/* <li> */}
+                {/* <Link
                   // class={`nav-link scrollto ${isContact ? "active" : ""}`}
                   to="/blogs"
                 >
                   Blogs
                 </Link> */}
-              {/* <NavLink
+                {/* <NavLink
                   to="/blogs"
                   activeClassname="active"
                   class="nav-link scrollto"
                 >
                   Blogs
                 </NavLink> */}
-              {/* </li> */}
-              <li>
-                <a
-                  class={`nav-link scrollto ${isContact ? "active" : ""}`}
-                  href="/#contact"
-                >
-                  Contact
-                </a>
-              </li>
-              {/* <Link
+                {/* </li> */}
+                <li>
+                  <a
+                    class={`nav-link scrollto ${isContact ? "active" : ""}`}
+                    href="/#contact"
+                  >
+                    Contact
+                  </a>
+                </li>
+                {/* <Link
                 // class={`nav-link scrollto ${isContact ? "active" : ""}`}
                 to="/login"
               >
                 Login
               </Link> */}
-              <li>
-                <a
-                  class="getstarted scrollto"
-                  href="https://play.google.com/store/apps/details?id=com.thekabook"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Download App
-                </a>
-              </li>
-            </ul>
-            <i
-              className={
-                isMobile
-                  ? "bi mobile-nav-toggle bi-x "
-                  : "bi mobile-nav-toggle bi-list "
-              }
-              onClick={() => setIsMobile(!isMobile)}
-            ></i>
-          </nav>
-        </div>
-      </header>
+                <li>
+                  <a
+                    class="getstarted scrollto"
+                    href="https://play.google.com/store/apps/details?id=com.thekabook"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Download App
+                  </a>
+                </li>
+              </ul>
+              <i
+                className={
+                  isMobile
+                    ? "bi mobile-nav-toggle bi-x "
+                    : "bi mobile-nav-toggle bi-list "
+                }
+                onClick={() => setIsMobile(!isMobile)}
+              ></i>
+            </nav>
+          </div>
+        </header>
+      )}
       {/* <Switch> */}
       <Routes>
         <Route
@@ -199,9 +202,10 @@ function App() {
             <Footer />,
           ]}
         />
-        <Route path="blogs" element={<Blogs />}></Route>
-        <Route path="blogs/page" element={<Page />} exact />
+        <Route path="/blogs" element={<Blogs />}></Route>
+        <Route path="/blogs/page" element={<Page />} exact />
         <Route path="login" element={<Login />} />
+        <Route path="supervisor-form" element={<SupervisorForm />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* </Switch> */}
