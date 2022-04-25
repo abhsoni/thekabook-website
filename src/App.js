@@ -136,12 +136,12 @@ function App() {
                   </a>
                 </li>
                 {/* <li> */}
-                {/* <Link
+                <Link
                   // class={`nav-link scrollto ${isContact ? "active" : ""}`}
                   to="/blogs"
                 >
                   Blogs
-                </Link> */}
+                </Link>
                 {/* <NavLink
                   to="/blogs"
                   activeClassname="active"
@@ -202,8 +202,8 @@ function App() {
             <Footer />,
           ]}
         />
-        <Route path="/blogs" element={<Blogs />}></Route>
-        <Route path="/blogs/page" element={<Page />} exact />
+        <Route path="blogs" element={<Blogs />}></Route>
+        <Route path="blogs/page" element={<Page />} exact />
         <Route path="login" element={<Login />} />
         <Route path="supervisor-form" element={<SupervisorForm />}></Route>
         <Route path="*" element={<NotFound />} />
