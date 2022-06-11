@@ -37,3 +37,22 @@
     </div>
   )}
 </Webcam>;
+
+useEffect(() => {
+  const token = window.localStorage.getItem("token");
+  var dashboard = window.localStorage.getItem("show-dashboard");
+  setShowDashboard(dashboard);
+  console.log(token);
+  console.log(dashboard);
+  console.log(showDashboard);
+
+  setToken(token);
+  var authSuccessful = window.localStorage.getItem("authSuccessful");
+  setAuthSuccessful(authSuccessful);
+  console.log(authSuccessful);
+}, []);
+useEffect(() => {
+  window.localStorage.setItem("token", token);
+  window.localStorage.setItem("show-dashboard", showDashboard);
+  window.localStorage.setItem("authSuccessful", authSuccessful);
+}, [token, showDashboard, authSuccessful]);

@@ -1,7 +1,8 @@
 import BlogTemp from "./blogs2";
 import { Link } from "react-router-dom";
 
-function Blogs() {
+function Blogs(props) {
+  const { blogNo, setBlogNo } = props;
   return (
     <section class="hero-section inner-page">
       {/* <div class="wave">
@@ -35,7 +36,7 @@ function Blogs() {
         </svg>
       </div> */}
 
-      <div class="container">
+      {/* <div class="container">
         <div class="row align-items-center">
           <div class="col-12">
             <div class="row justify-content-center">
@@ -50,7 +51,7 @@ function Blogs() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <section id="breadcrumbs" class="breadcrumbs">
         <div class="container">
           <ol>
@@ -62,7 +63,7 @@ function Blogs() {
           <h2>Blog</h2>
         </div>
       </section>
-      <BlogTemp />
+      <BlogTemp blogNo={blogNo} setBlogNo={setBlogNo} />
     </section>
   );
 }

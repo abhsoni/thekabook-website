@@ -11,10 +11,13 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Route, Routes, Switch } from "react-router-dom";
 import Page from "./components/blogs/page";
+import Page2 from "./components/blogs/page2";
 import { createBrowserHistory } from "history";
 import NotFound from "./components/notFound";
 import Login from "./components/webEstimate/login";
 import SupervisorForm from "./components/supervisorForm/supervisor-form";
+import Dashboard from "./components/supplyPartnerDashboard/dashboard";
+import GoogleMapFunc from "./components/supplyPartnerDashboard/googleMap";
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
@@ -23,6 +26,8 @@ function App() {
   const [isFeatures, setIsFeatures] = useState(false);
   const [isTeam, setIsTeam] = useState(false);
   const [isContact, setIsContact] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("cement");
+  const [blogNo, setBlogNo] = useState("");
   const highlightNavBar = () => {
     if (window.scrollY <= 1062) {
       setIsHome(true);
@@ -63,9 +68,19 @@ function App() {
   //   });
   window.addEventListener("scroll", highlightNavBar);
   const pathname = window.location.pathname;
+  var stylingObject;
+  if (pathname === "/login") {
+    stylingObject = { section: { paddingBottom: "0px" } };
+  } else {
+    stylingObject = { section: { paddingBottom: "60px" } };
+  }
   console.log(pathname);
+  function logoutHandler() {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  }
   return (
-    <section>
+    <section style={stylingObject.section}>
       {pathname === "/supervisor-form" ? null : (
         <header id="header" class="fixed-top">
           <div class="container d-flex align-items-center justify-content-between">
@@ -158,12 +173,18 @@ function App() {
                     Contact
                   </a>
                 </li>
-                {/* <Link
-                // class={`nav-link scrollto ${isContact ? "active" : ""}`}
-                to="/login"
-              >
-                Login
-              </Link> */}
+                {window.localStorage.getItem("token") ? (
+                  <a href="/" onClick={() => logoutHandler()}>
+                    Log Out
+                  </a>
+                ) : (
+                  <Link
+                    // class={`nav-link scrollto ${isContact ? "active" : ""}`}
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                )}
                 <li>
                   <a
                     class="getstarted scrollto"
@@ -202,10 +223,34 @@ function App() {
             <Footer />,
           ]}
         />
-        <Route path="blogs" element={<Blogs />}></Route>
-        <Route path="blogs/page" element={<Page />} exact />
+        <Route
+          path="blogs"
+          element={<Blogs blogNo={blogNo} setBlogNo={setBlogNo} />}
+        ></Route>
+        <Route path="blogs/page" element={<Page blogNo={blogNo} />} exact />
+        <Route path="blogs/page2" element={<Page2 blogNo={blogNo} />} exact />
         <Route path="login" element={<Login />} />
         <Route path="supervisor-form" element={<SupervisorForm />}></Route>
+        <Route
+          path="supply-partner-dashboard"
+          element={
+            <Dashboard
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          }
+        ></Route>
+        <Route
+          path="supply-partner-dashboard/maps"
+          element={
+            <GoogleMapFunc
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          }
+          exact
+        ></Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       {/* </Switch> */}

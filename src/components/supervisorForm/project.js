@@ -124,25 +124,31 @@ function Project(props) {
   //       console.log(siteAddress);
   //     });
   // });
-  const siteProjects = [
-    {
-      id: 1,
-      name: "Bungalow site 1 @ Ram Nagar",
-    },
-    {
-      id: 2,
-      name: "Bungalow site 2 @ Ram Nagar",
-    },
-    {
-      id: 3,
-      name: "Bungalow site 3 @ Ram Nagar",
-    },
-    {
-      id: 4,
-      name: "Bungalow site 4 @ Ram Nagar",
-    },
-  ];
-
+  // const siteProjects = [
+  //   {
+  //     id: 1,
+  //     name: "Bungalow site 1 @ Ram Nagar",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Bungalow site 2 @ Ram Nagar",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Bungalow site 3 @ Ram Nagar",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Bungalow site 4 @ Ram Nagar",
+  //   },
+  // ];
+  const [siteProjects, setSiteProjects] = useState([]);
+  useEffect(() => {
+    siteAddress.map((projects, index) => {
+      return siteProjects.push(siteAddress[index]);
+    });
+    console.log(siteProjects[0] + "+++++" + siteAddress[0]);
+  });
   // const fileUploadHandler = () => {};
   return (
     <section>
@@ -153,7 +159,8 @@ function Project(props) {
             {/* {siteAddress.map((siteadd) => {
               return <div>{siteadd}</div>;
             })} */}
-            {siteAddress.map((projects, index) => {
+            <div>{siteAddress[0]}</div>
+            {/* {siteProjects.map((projects, index) => {
               return projectSite === index + 1 ? (
                 <div
                   className="row align-items-center g-0 mt-2"
@@ -171,7 +178,7 @@ function Project(props) {
                       className="a"
                       onClick={() => projectSiteHandler(index + 1)}
                     >
-                      {projects}
+                      {siteProjects[0]}
                     </a>
                   </div>
                 </div>
@@ -189,12 +196,12 @@ function Project(props) {
                       className="a"
                       onClick={() => projectSiteHandler(index + 1)}
                     >
-                      {projects}
+                      {siteProjects[0]}
                     </a>
                   </div>
                 </div>
               );
-            })}
+            })} */}
 
             {/* <div className="row align-items-center g-0 mt-2">
               <div className="col-2 circle">

@@ -26,7 +26,7 @@ function Home() {
     console.log("jkdhkh", phoneNo, " ", phone_number_format);
     axios
       .post(
-        "http://15.206.127.253/api/v1/app-invite/",
+        "https://prod.thekabook.com/api/v1/app-invite/",
         {
           phone_number: phone_number_format,
         },
