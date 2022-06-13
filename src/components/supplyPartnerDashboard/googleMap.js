@@ -165,7 +165,7 @@ function GoogleMapFunc(props) {
   const lng = useSelector((state) => state.coordinates.lng);
   const { isLoaded } = useLoadScript({
     // id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDiFw4rr5GchbXr6eXldGMWSORdVnzPIU4",
+    googleMapsApiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
   });
   // const center = {
   //   lat: -3.745,
